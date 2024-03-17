@@ -11,7 +11,7 @@ const DutyList: React.FC = () => {
   const [duties, setDuties] = useState<Duty[]>([]);
 
   useEffect(() => {
-    axios.get<Duty[]>('/api/duties')
+    axios.get<Duty[]>('http://localhost:3000/duties/')
       .then(response => {
         setDuties(response.data);
       })
@@ -27,7 +27,7 @@ const DutyList: React.FC = () => {
       key: 'id',
     },
     {
-      title: 'Nombre',
+      title: 'Name',
       dataIndex: 'name',
       key: 'name',
     },
