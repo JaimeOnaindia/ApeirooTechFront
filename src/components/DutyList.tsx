@@ -27,7 +27,7 @@ const DutyList: React.FC = () => {
       key: 'id',
     },
     {
-      title: 'Nombre',
+      title: 'Name',
       dataIndex: 'name',
       key: 'name',
     },
