@@ -37,7 +37,7 @@ const DutyList: React.FC = () => {
 
   const handleNewDutyModalClose = () => {
     setIsNewDutyModalVisible(false);
-    fetchDuties(); // Recargar la lista de deberes después de crear uno nuevo
+    fetchDuties();
   };
 
   return (
@@ -62,15 +62,15 @@ const DutyList: React.FC = () => {
       />
       <Modal
         title="Edit Duty"
-        visible={isModalVisible}
+        open={isModalVisible}
         onCancel={handleModalClose}
         footer={null}
       >
-        <EditDutyForm dutyId={selectedDuty.id} dutyName={selectedDuty.name} onSave={handleModalClose} onClose={handleModalClose} />
+        <EditDutyForm dutyId={selectedDuty.id} dutyName={selectedDuty.name} onSave={handleModalClose} />
       </Modal>
       <Modal
         title="Create New Duty"
-        visible={isNewDutyModalVisible}
+        open={isNewDutyModalVisible}
         onCancel={handleNewDutyModalClose}
         footer={null}
       >
