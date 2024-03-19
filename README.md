@@ -1,5 +1,3 @@
-Nota: No he tenido casi tiempo para poder mirar el FRONT, me gustaria haber creado la tabla inicial con modales para la modificación y elminiación por fila y un boton de crear arriba de la tabla.
-
 
 # Getting Started with Create React App
 
