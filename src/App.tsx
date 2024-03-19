@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import DutyList from './components/DutyList';
+import './App.css';
 
 function App() {
   return (
