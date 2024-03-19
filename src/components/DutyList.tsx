@@ -1,11 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Table, Button } from 'antd';
+import { Table, Button, Modal } from 'antd';
 import { EditOutlined } from '@ant-design/icons';
 import Duty from '../models/Duty';
+import NewDutyForm from './NewDutyForm';
 
 const DutyList: React.FC = () => {
   const [duties, setDuties] = useState<Duty[]>([]);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const handleEdit = (dutyId: number) => {
+    setIsModalVisible(true);
+  };
+
+  const handleModalClose = () => {
+    setIsModalVisible(false);
+  };
 
   useEffect(() => {
     axios.get<Duty[]>('http://localhost:3000/duties')
@@ -39,15 +49,22 @@ const DutyList: React.FC = () => {
     },
   ];
 
-  const handleEdit = (dutyId: number) => {
-    // Aquí puedes manejar la lógica para la modificación de la fila
-    console.log('Edit duty with ID:', dutyId);
-  };
-
   return (
     <>
-      <Button type="primary" style={{ marginBottom: '20px' }}>Create New Duty</Button>
-      <Table dataSource={duties} columns={columns} rowKey="id" />
+      <Button type="primary" style={{ marginBottom: '20px' }} onClick={() => setIsModalVisible(true)}>Create New Duty</Button>
+      <Table
+        dataSource={duties}
+        columns={columns}
+        rowKey="id"
+      />
+      <Modal
+        title="Create New Duty"
+        visible={isModalVisible}
+        onCancel={handleModalClose}
+        footer={null}
+      >
+        <NewDutyForm onFinish={handleModalClose} />
+      </Modal>
     </>
   );
 };
