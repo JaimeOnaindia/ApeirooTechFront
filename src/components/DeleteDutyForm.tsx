@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Input, Button, Modal } from 'antd';
+import { Form, Input, Button } from 'antd';
 import axios from 'axios';
 
 interface DeleteDutyFormProps {
