@@ -28,8 +28,8 @@ const DutyList: React.FC = () => {
     fetchDuties();
   }, []);
 
-  const handleEditModal = (record: any) => {
-    setSelectedDuty({ id: record.id, name: record.name });
+  const handleEditModal = (record: Duty) => {
+    setSelectedDuty(record);
     setIsModalVisible(true);
   };
 
@@ -40,6 +40,7 @@ const DutyList: React.FC = () => {
 
   const handleModalClose = () => {
     setIsModalVisible(false);
+    fetchDuties();
   };
 
   const handleNewDutyModalClose = () => {
@@ -80,12 +81,12 @@ const DutyList: React.FC = () => {
       >
         <EditDutyForm dutyId={selectedDuty.id} dutyName={selectedDuty.name} onSave={handleModalClose} />
       </Modal>
-          <Modal
-      title="Eliminar Duty"
-      open={isDeleteModalVisible}
-      onCancel={() => setIsDeleteModalVisible(false)}
-      footer={null}
-    >
+      <Modal
+        title="Eliminar Duty"
+        open={isDeleteModalVisible}
+        onCancel={() => setIsDeleteModalVisible(false)}
+        footer={null}
+      >
       <DeleteDutyForm dutyId={selectedDuty.id} dutyName={selectedDuty.name} onDeleted={() => {
         setIsDeleteModalVisible(false);
         fetchDuties();
