@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Table, Button, Modal } from 'antd';
-import { EditOutlined } from '@ant-design/icons';
+import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import NewDutyForm from './NewDutyForm';
 import EditDutyForm from './EditDutyForm';
+import DeleteDutyForm from './DeleteDutyForm';
 import Duty from '../models/Duty';
 
 const DutyList: React.FC = () => {
@@ -11,6 +12,7 @@ const DutyList: React.FC = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedDuty, setSelectedDuty] = useState({ id: 0, name: '' });
   const [isNewDutyModalVisible, setIsNewDutyModalVisible] = useState(false);
+  const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
 
   const fetchDuties = () => {
     axios.get<Duty[]>('http://localhost:3000/duties')
@@ -26,9 +28,14 @@ const DutyList: React.FC = () => {
     fetchDuties();
   }, []);
 
-  const handleEdit = (record: any) => {
+  const handleEditModal = (record: any) => {
     setSelectedDuty({ id: record.id, name: record.name });
     setIsModalVisible(true);
+  };
+
+  const handleDeleteModal = (record: Duty) => {
+    setSelectedDuty(record);
+    setIsDeleteModalVisible(true);
   };
 
   const handleModalClose = () => {
@@ -52,9 +59,14 @@ const DutyList: React.FC = () => {
             title: 'Action',
             key: 'action',
             render: (text: any, record: any) => (
-              <Button type="link" icon={<EditOutlined />} onClick={() => handleEdit(record)}>
-                Edit
-              </Button>
+              <>
+                <Button type="link" icon={<EditOutlined />} onClick={() => handleEditModal(record)}>
+                  Edit
+                </Button>
+                <Button type="link" icon={<DeleteOutlined />} onClick={() => handleDeleteModal(record)}>
+                  Delete
+                </Button>
+              </>
             ),
           },
         ]}
@@ -68,6 +80,17 @@ const DutyList: React.FC = () => {
       >
         <EditDutyForm dutyId={selectedDuty.id} dutyName={selectedDuty.name} onSave={handleModalClose} />
       </Modal>
+          <Modal
+      title="Eliminar Duty"
+      open={isDeleteModalVisible}
+      onCancel={() => setIsDeleteModalVisible(false)}
+      footer={null}
+    >
+      <DeleteDutyForm dutyId={selectedDuty.id} dutyName={selectedDuty.name} onDeleted={() => {
+        setIsDeleteModalVisible(false);
+        fetchDuties();
+      }} />
+    </Modal>
       <Modal
         title="Create New Duty"
         open={isNewDutyModalVisible}
