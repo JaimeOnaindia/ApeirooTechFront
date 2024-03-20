@@ -38,6 +38,11 @@ const DutyList: React.FC = () => {
     setIsDeleteModalVisible(true);
   };
 
+  const handleDeleteModalClose = () => {
+    setIsDeleteModalVisible(false);
+    fetchDuties();
+  };
+
   const handleModalClose = () => {
     setIsModalVisible(false);
     fetchDuties();
@@ -73,32 +78,14 @@ const DutyList: React.FC = () => {
         ]}
         rowKey="id"
       />
-      <Modal
-        title="Edit Duty"
-        open={isModalVisible}
-        onCancel={handleModalClose}
-        footer={null}
-      >
-        <EditDutyForm dutyId={selectedDuty.id} dutyName={selectedDuty.name} onSave={handleModalClose} />
+      <Modal title="Edit Duty" open={isModalVisible} onCancel={handleModalClose} footer={null}>
+        <EditDutyForm dutyId={selectedDuty.id} dutyName={selectedDuty.name} onSave={handleModalClose}/>
       </Modal>
-      <Modal
-        title="Eliminar Duty"
-        open={isDeleteModalVisible}
-        onCancel={() => setIsDeleteModalVisible(false)}
-        footer={null}
-      >
-      <DeleteDutyForm dutyId={selectedDuty.id} dutyName={selectedDuty.name} onDeleted={() => {
-        setIsDeleteModalVisible(false);
-        fetchDuties();
-      }} />
-    </Modal>
-      <Modal
-        title="Create New Duty"
-        open={isNewDutyModalVisible}
-        onCancel={handleNewDutyModalClose}
-        footer={null}
-      >
-        <NewDutyForm onFinish={handleNewDutyModalClose} />
+      <Modal title="Eliminar Duty" open={isDeleteModalVisible} onCancel={handleDeleteModalClose} footer={null}>
+        <DeleteDutyForm dutyId={selectedDuty.id} dutyName={selectedDuty.name} onDeleted={handleDeleteModalClose} />
+      </Modal>
+      <Modal title="Create New Duty" open={isNewDutyModalVisible} onCancel={handleNewDutyModalClose} footer={null}>
+        <NewDutyForm onFinish={handleNewDutyModalClose}/>
       </Modal>
     </>
   );
