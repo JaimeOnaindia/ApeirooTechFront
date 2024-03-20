@@ -20,7 +20,7 @@ const NewDutyForm: React.FC<NewDutyFormProps> = ({ onCreate }) => {
 
   return (
     <Form onFinish={handleSubmit}>
-      <Form.Item name="id" label="ID" rules={[{ required: true, message: 'Please enter ID' }]}>
+      <Form.Item name="id" label="ID" rules={[{ required: true, message: 'Please enter ID, must be a number' }]}>
         <Input type="number" />
       </Form.Item>
       <Form.Item name="name" label="Name" rules={[{ required: true, message: 'Please enter duty name' }]}>
