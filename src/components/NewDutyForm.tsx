@@ -3,15 +3,15 @@ import { Form, Input, Button } from 'antd';
 import axios from 'axios';
 
 interface NewDutyFormProps {
-  onFinish: () => void;
+  onCreate: () => void;
 }
 
-const NewDutyForm: React.FC<NewDutyFormProps> = ({ onFinish }) => {
+const NewDutyForm: React.FC<NewDutyFormProps> = ({ onCreate }) => {
   const handleSubmit = (values: any) => {
     axios.post('http://localhost:3000/duties', values)
       .then(response => {
         console.log('Duty created:', response.data);
-        onFinish();
+        onCreate();
       })
       .catch(error => {
         console.error('Error creating duty:', error);

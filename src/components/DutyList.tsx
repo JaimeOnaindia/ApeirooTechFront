@@ -82,10 +82,10 @@ const DutyList: React.FC = () => {
         <EditDutyForm dutyId={selectedDuty.id} dutyName={selectedDuty.name} onSave={handleModalClose}/>
       </Modal>
       <Modal title="Eliminar Duty" open={isDeleteModalVisible} onCancel={handleDeleteModalClose} footer={null}>
-        <DeleteDutyForm dutyId={selectedDuty.id} dutyName={selectedDuty.name} onDeleted={handleDeleteModalClose} />
+        <DeleteDutyForm dutyId={selectedDuty.id} dutyName={selectedDuty.name} onDelete={handleDeleteModalClose} />
       </Modal>
       <Modal title="Create New Duty" open={isNewDutyModalVisible} onCancel={handleNewDutyModalClose} footer={null}>
-        <NewDutyForm onFinish={handleNewDutyModalClose}/>
+        <NewDutyForm onCreate={handleNewDutyModalClose}/>
       </Modal>
     </>
   );

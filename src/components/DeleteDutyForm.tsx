@@ -5,16 +5,16 @@ import axios from 'axios';
 interface DeleteDutyFormProps {
   dutyId: number;
   dutyName: string;
-  onDeleted: () => void;
+  onDelete: () => void;
 }
 
-const DeleteDutyForm: React.FC<DeleteDutyFormProps> = ({ dutyId, dutyName, onDeleted }) => {
+const DeleteDutyForm: React.FC<DeleteDutyFormProps> = ({ dutyId, dutyName, onDelete }) => {
   
   const handleDelete = () => {
     axios.delete(`http://localhost:3000/duties/${dutyId}`)
         .then(response => {
         console.log('Duty deleted:', response.data);
-        onDeleted();
+        onDelete();
         })
         .catch(error => {
         console.error('Error deleting duty:', error);
